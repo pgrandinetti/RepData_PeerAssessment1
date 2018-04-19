@@ -14,6 +14,10 @@ df = read.csv("activity.csv")
 Then transform it into a `data.table` object, for convenience.
 
 
+```r
+library(data.table)
+DT = data.table(df)
+```
 
 ## What is mean total number of steps taken per day?
 
@@ -25,6 +29,17 @@ daySum = DT[, list(stepSum=sum(steps, na.rm=T)), by=date]
 ```
 
 Then, visualize a histogram of the result.
+
+
+```r
+library(ggplot2)
+qplot(
+    daySum$stepSum,
+    geom="histogram",
+    xlab="Total number of steps",
+    binwidth=1000
+)
+```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
@@ -145,6 +160,10 @@ The new `mean` and `median` are higher due to the (quite simple) filling strateg
 Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 
+```r
+# For systems with default language different than english
+Sys.setlocale("LC_TIME", "C")
+```
 
 
 ```r

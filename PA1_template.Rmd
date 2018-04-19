@@ -12,7 +12,7 @@ df = read.csv("activity.csv")
 
 Then transform it into a `data.table` object, for convenience.
 
-```{r, echo=FALSE}
+```{r, results="hide", message=FALSE}
 library(data.table)
 DT = data.table(df)
 ```
@@ -27,7 +27,7 @@ daySum = DT[, list(stepSum=sum(steps, na.rm=T)), by=date]
 
 Then, visualize a histogram of the result.
 
-```{r, echo=FALSE}
+```{r}
 library(ggplot2)
 qplot(
     daySum$stepSum,
@@ -111,7 +111,7 @@ The new `mean` and `median` are higher due to the (quite simple) filling strateg
 
 Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
-```{r, echo=FALSE, results="hide"}
+```{r, results="hide"}
 # For systems with default language different than english
 Sys.setlocale("LC_TIME", "C")
 ```
